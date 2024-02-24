@@ -1,0 +1,39 @@
+<%if(!locals.currUser){%>
+    <nav class="navbar bg-body-tertiary" style="height: 4rem">
+      <div class="container-fluid">
+        <div class="mx-auto">Learn about Guest Favorite and most loved homes on <a class="text-body-secondary" href="/listings">AIRBNB</a>. Please Login to continue</div>
+      </div>
+    </nav>
+    <%}%>
+    <nav class="navbar navbar-expand-sm bg-body-light sticky-top border-bottom border-top">
+        <div class="container-fluid">
+          <a class="navbar-brand col-1" href="/">
+            <i class="fa-solid fa-compass fs-1 mx-5"></i>
+    
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="background-color: white;">
+            <div class="navbar-nav">
+              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/">Add Listing</a>
+            </div>
+    
+          
+    
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link btn btn-light rounded-pill" href="/" >Airbnb your home</a>&nbsp;
+              <% if(!locals.currUser){ %>
+                <button class="btn btn-outline-dark rounded-pill" onclick="location.href = '/';">Sign-Up</button>&nbsp;
+                <button class="btn btn-outline-dark rounded-pill" onclick="location.href = '/';">Log-In</button>&nbsp;
+              <% } %>    
+              <% if(locals.currUser){ %>
+                <a class="nav-link" href="/">Log-Out</a>&nbsp;
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+    

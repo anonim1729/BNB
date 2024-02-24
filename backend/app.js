@@ -10,7 +10,18 @@ let cors=require("cors");
 let passport=require("passport");
 const LocalStrategy=require("passport-local");
 
+const path = require("path");
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
+app.use(express.static(path.join(__dirname, "/public")))
+
 app.use(express.urlencoded({ extended: true }));
+
+const methodOverride=require("method-override");
+app.use(methodOverride("_method"));
+
+const engine=require("ejs-mate");
+app.engine("ejs",engine);
 
 const dbUrl = process.env.ATLASDB_URL;
 const mongoose = require("mongoose");
@@ -24,10 +35,15 @@ async function main() {
     // await mongoose.connect("mongodb://127.0.0.1:27017/cma");
 }
 
+const asyncWrap=require("./utilities/asyncWrap.js");
+const ExpressErr=require("./utilities/expressError.js");
+
 let User=require("./models/user");
 
 const session=require("express-session");
 const MongoStore = require('connect-mongo');
+
+let userRouter =require("./routes/userRouter.js");
 
 let store=MongoStore.create({
     mongoUrl: dbUrl,
@@ -54,26 +70,18 @@ let sessionOptions={
 }
 app.use(session(sessionOptions));
 
-
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
 
-passport.serializeUser(function(user,done){  
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-    done(null,user);
-  });
-  passport.deserializeUser(function(id,done){
-      User
-      .findById(id)
-      .then(function(user){
-          // console.log(user);
-          done(null,user);
-      })
-      .catch((err)=>{
-        console.log(err);
-        done(err,user);
-      })
-  });
+app.use((req,res,next)=>{
+    
+    res.locals.currUser= req.user;
+    next();
+});
 
 
 app.use(cors({
@@ -83,27 +91,27 @@ app.use(cors({
     credentials: true
 }))
 
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) { return done(null, false); }
-        return done(null, user);
-      });
-    }
-  ));
+app.use("/",userRouter);
+///
 
 
-app.post("/login",passport.authenticate("local",{
-    failureRedirect:"/login",
-    }),
-    (req,res)=>{
-    let {username,password} =req.body;
-    console.log(req.body);
+  app.get("/",(req,res)=>{
+    res.render("home.ejs");
+  })
 
-    res.send("hello");
-})
+  app.get("/login",(req,res)=>{
+    res.render("login.ejs");
+  })
+
+// app.post("/login",passport.authenticate("local",{
+//     failureRedirect:"/login",
+//     }),
+//     (req,res)=>{
+//     let {username,password} =req.body;
+//     console.log(req.body);
+
+//     res.send("hello");
+// })
 
 app.get("/login/success",(req,res)=>{
     if(req.user){
@@ -142,6 +150,19 @@ app.post('/logout', function(req, res, next) {
       res.send('logged out');
     });
   });
+
+
+  ///
+  app.all("*",(req,res,next)=>{
+    let err= new ExpressErr(404,"Page not found");
+    next(err);
+})
+
+app.use((err, req, res, next)=>{
+    console.log(err);
+    let {statusCode=500, message="something went wrong"}= err;
+    res.status(statusCode).render("error.ejs",{message});
+});
 
 app.listen(3000, () => {
     console.log("app running on 3000");
