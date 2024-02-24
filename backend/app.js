@@ -48,7 +48,7 @@ let sessionOptions={
     cookie: {
         expires: Date.now()+ 1000*60*60*24*3,
         maxAge: 1000*60*60*24*3,
-        secure: false,
+        secure: false, 
     }
 }
 app.use(session(sessionOptions));
