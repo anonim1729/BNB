@@ -13,6 +13,8 @@ import Inventory from './pages/Inventory';
 import Seed from './pages/dataComponents/Seed';
 import AddSeed from './pages/dataComponents/AddSeed';
 import Navbar from './components/Navbar';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
 function App() {
 
