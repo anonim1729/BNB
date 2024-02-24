@@ -17,4 +17,4 @@ const SeedsData = ({seedData,setSeedData}) => {
     )
 }
 
-export default SeedsData
+export default SeedsData;
