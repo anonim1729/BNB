@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 import Carousel from '../components/Carousel'
 import Hero from '../components/Hero'
 
-const Home = () => {
+const Home = ({user}) => {
   return (
     <>
       <Navbar/>
