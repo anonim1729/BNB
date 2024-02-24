@@ -32,7 +32,7 @@ const Login=()=>{
 		<div className='loginContainer'>
       
 			<form onSubmit={handleSubmit} className='loginBox'> 
-      <h1>Login</h1>
+      <h1>Register</h1>
       <div> 
 					<label htmlFor="username">User Name</label>
 					<input type="text" name="username" id="username" value={username}
