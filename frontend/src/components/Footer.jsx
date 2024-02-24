@@ -3,7 +3,7 @@ import "../../public/footer.css"
 
 const Footer = () => {
     return (<>
-        <div className="container">
+        <div className="container myClass">
             <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-3 border-top px-5">
                 <p className="col-md-4 mb-0 text-muted">&copy; 2021 Company, Inc</p>
 
