@@ -7,10 +7,10 @@ let userSchema= new Schema({
         type: String,
         required: true, 
     },
-    capacity: {
-        type: Number,
-        required: true,
-    },
+    // capacity: {
+    //     type: Number,
+    //     required: true,
+    // },
     fertilizers:[
         {
             type: Schema.Types.ObjectId,
@@ -23,7 +23,7 @@ let userSchema= new Schema({
             ref: "Stock"
         },
     ],
-    tools:[
+    tool:[
         {
             type: Schema.Types.ObjectId,
             ref: "Tool"

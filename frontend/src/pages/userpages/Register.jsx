@@ -1,47 +1,59 @@
 import React from 'react'
 import {useState} from 'react';
-
+import axios from 'axios';
+import { BASE_URL } from '../../../config'
 
 const Login=()=>{
-    const [firstName,setFirstName]=useState("");
-    const [lastName,setLastName]=useState("");
+    const [username,setUsername]=useState("");
+	
+    
   const [email,setEmail]=useState(""); 
-  const [passw, setPassw]=useState(""); 
-  const [emailErr,setEmailErr]=useState("");
-  const [passErr,setPassErr]=useState("");
-  const handleOnChange=(e)=>{
-
+  const [password, setPassword]=useState(""); 
+  
+  const handleSubmit= (e)=>{
+	e.preventDefault();
+	axios({
+		method: 'post',
+		url: BASE_URL+"/register",
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Accept': 'application/json',
+		},
+		data: {
+		  username,email,password
+		},
+	  }) .then((res)=>{
+		console.log(res);
+	  }) .catch((err)=>{
+		console.log(err);
+	  })
+  
   }
 	return(
 		<div className='loginContainer'>
       
-			<form action="" onSubmit={()=>{handleOnSubmit()}} className='loginBox'> 
+			<form onSubmit={handleSubmit} className='loginBox'> 
       <h1>Login</h1>
       <div> 
-					<label htmlFor="firstName">First Name</label>
-					<input type="text" name="firstName" id="firstName" value={firstName}
-          onChange={(e)=>{setFirstName(e.target.value)}}
+					<label htmlFor="username">User Name</label>
+					<input type="text" name="username" id="username" value={username}
+          onChange={(e)=>{setUsername(e.target.value)}}
           /> 
           
 				</div> 
-                <div> 
-					<label htmlFor="lastName">Last Name</label>
-					<input type="text" name="lastName" id="lastName" value={lastName}
-          onChange={(e)=>{setLastName(e.target.value)}}
-          /> 
-         
-				</div> 
+                
 				<div> 
 					<label htmlFor="email">Email</label>
 					<input type="text" name="email" id="email" value={email}
           onChange={(e)=>{setEmail(e.target.value)}}
           /> 
-          {emailErr&&<label htmlFor='emailErr'>{emailErr}</label>}
-				</div> 
+         
+			</div> 
+
 				<div> 
-					<label htmlFor="passw">Password</label>
-					<input type="text" name="passw" id="passw" value={passw} onChange={(e)=>{setPassw(e.target.value)}}/> 
-          {passErr&&<label htmlFor='passErr'>{passErr}</label>}
+					<label htmlFor="password">Password</label>
+					<input type="password" name="password" id="password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/> 
+          
 				</div>  
 				<button type="submit">Login</button>
 			</form>
