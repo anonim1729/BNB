@@ -7,8 +7,11 @@ import Home from './pages/Home';
 import "../public/footer.css"
 import Register from './pages/userpages/Register';
 import Footer from './components/Footer';
-import axios from 'axios';
-import { BASE_URL } from '../config';
+import Chart from './pages/dataComponents/Chart';
+import SeedsData from './pages/dataComponents/SeedsData';
+import Inventory from './pages/Inventory';
+import Seed from './pages/dataComponents/Seed';
+import AddSeed from './pages/dataComponents/AddSeed';
 import Navbar from './components/Navbar';
 
 function App() {

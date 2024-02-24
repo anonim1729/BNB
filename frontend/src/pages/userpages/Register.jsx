@@ -5,9 +5,8 @@ import { BASE_URL } from '../../../config'
 import { Link } from 'react-router-dom';
 
 const Login=()=>{
-    const [username,setUsername]=useState("");
-	
-    
+
+  const [username,setUsername]=useState("");
   const [email,setEmail]=useState(""); 
   const [password, setPassword]=useState(""); 
   
