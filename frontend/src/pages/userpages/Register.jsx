@@ -2,6 +2,7 @@ import React from 'react'
 import {useState} from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../../config'
+import { Link } from 'react-router-dom';
 
 const Login=()=>{
     const [username,setUsername]=useState("");
@@ -33,7 +34,7 @@ const Login=()=>{
 		<div className='loginContainer'>
       
 			<form onSubmit={handleSubmit} className='loginBox'> 
-      <h1>Login</h1>
+      <h1>Register</h1>
       <div> 
 					<label htmlFor="username">User Name</label>
 					<input type="text" name="username" id="username" value={username}
@@ -56,6 +57,8 @@ const Login=()=>{
           
 				</div>  
 				<button type="submit">Login</button>
+				<hr />
+      			<Link to="/login">Already registered?</Link>
 			</form>
 		</div>
 	)

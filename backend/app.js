@@ -58,6 +58,23 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser(function(user,done){  
+
+    done(null,user);
+  });
+  passport.deserializeUser(function(id,done){
+      User
+      .findById(id)
+      .then(function(user){
+          // console.log(user);
+          done(null,user);
+      })
+      .catch((err)=>{
+        console.log(err);
+        done(err,user);
+      })
+  });
+
 
 app.use(cors({
     origin: process.env.FRONTEND_URL,
@@ -118,6 +135,13 @@ app.post("/register",async(req,res,next)=>{
         res.send(e);
     }
 })
+
+app.post('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.send('logged out');
+    });
+  });
 
 app.listen(3000, () => {
     console.log("app running on 3000");

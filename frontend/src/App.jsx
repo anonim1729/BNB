@@ -9,6 +9,7 @@ import Register from './pages/userpages/Register';
 import Footer from './components/Footer';
 import axios from 'axios';
 import { BASE_URL } from '../config';
+import Navbar from './components/Navbar';
 
 function App() {
 
@@ -41,10 +42,16 @@ function App() {
   return (
     <>
       <div className='container-body'>
+      <Navbar user={user}/>
       <Routes>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/' element={<Home user={user}/>}></Route>
+        {user && user.length!=0? 
+        <Route path='' element={<Home/>}></Route>
+        : 
+        <Route path='/login' element={<Login/>}></Route>
+        }
         </Routes>
       </div>
       <Footer/>
