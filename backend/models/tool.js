@@ -3,9 +3,12 @@ const {Schema}=mongoose;
 const passportLocalMongoose=require("passport-local-mongoose");
 
 let toolSchema= new Schema({
-    resource:{
-        
-    }
+    name: String,
+    resource:[{
+        type: String,
+    }],
+    uses: String,
+    price: Number,
 });
 
 module.exports=mongoose.model("Tool",toolSchema)

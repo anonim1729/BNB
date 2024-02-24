@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { BASE_URL } from '../../../config'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-
+  const navigate=useNavigate();
 
   let handleOnSubmit = (e) => {
     e.preventDefault();
@@ -29,8 +29,10 @@ const Login = () => {
       },
     }).then((res) => {
       console.log(res);
+      navigate("/");
     }).catch((err) => {
       console.log(err);
+      navigate("/login");
     })
 
   };

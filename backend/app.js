@@ -23,6 +23,8 @@ app.use(methodOverride("_method"));
 const engine=require("ejs-mate");
 app.engine("ejs",engine);
 
+let {isLoggedIn}=require("./middlewares.js");
+
 const dbUrl = process.env.ATLASDB_URL;
 const mongoose = require("mongoose");
 main().then((res) => {
@@ -39,6 +41,7 @@ const asyncWrap=require("./utilities/asyncWrap.js");
 const ExpressErr=require("./utilities/expressError.js");
 
 let User=require("./models/user");
+let Tool=require("./models/tool.js");
 
 const session=require("express-session");
 const MongoStore = require('connect-mongo');
@@ -92,74 +95,48 @@ app.use(cors({
 }))
 
 app.use("/",userRouter);
-///
+
 
 
   app.get("/",(req,res)=>{
     res.render("home.ejs");
   })
 
-  app.get("/login",(req,res)=>{
-    res.render("login.ejs");
-  })
+ app.get("/option",(req,res)=>{
+    res.render("option.ejs");
+ })
 
-// app.post("/login",passport.authenticate("local",{
-//     failureRedirect:"/login",
-//     }),
-//     (req,res)=>{
-//     let {username,password} =req.body;
-//     console.log(req.body);
+ app.get("/workbench",isLoggedIn,asyncWrap(async(req,res)=>{
+    let toolArr=await Tool.find({});
+    console.log(toolArr);
+    res.render("workbench.ejs",{toolArr});
+ }))
 
-//     res.send("hello");
-// })
-
-app.get("/login/success",(req,res)=>{
-    if(req.user){
-        res.status(200).json({
-            success:true,
-            user: req.user,
-        });
-    }
+app.get("/workbench/new",isLoggedIn,(req,res)=>{
+    res.render("workbench/newTool.ejs");
 })
 
-app.post("/register",async(req,res,next)=>{
-    try{
-        let {username, email, password}=req.body;
-        
-        let newUser= new User({
-            username,email
-        });
-        let registeredUser=await User.register(newUser,password);
-        console.log(registeredUser);
-        req.login(registeredUser,(err)=>{
-            if(err){
-                return next(err);
-            }
-           
-            res.send("///");
-        })
-    } catch(e){
-        console.log(e);
-        res.send(e);
-    }
-})
+app.post("/workbench/new",isLoggedIn,asyncWrap(async(req,res)=>{
+    console.log(req.body);
+    let newTool=new Tool(req.body.tool);
+    let saveTool=await newTool.save();
+    res.redirect("/workbench");
+}));
 
-app.post('/logout', function(req, res, next) {
-    req.logout(function(err) {
-      if (err) { return next(err); }
-      res.send('logged out');
-    });
-  });
+ app.get("/farm",isLoggedIn,(req,res)=>{
+    res.render("farm.ejs");
+ })
 
 
-  ///
+
+
   app.all("*",(req,res,next)=>{
     let err= new ExpressErr(404,"Page not found");
     next(err);
 })
 
 app.use((err, req, res, next)=>{
-    console.log(err);
+    
     let {statusCode=500, message="something went wrong"}= err;
     res.status(statusCode).render("error.ejs",{message});
 });

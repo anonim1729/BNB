@@ -4,8 +4,8 @@ const router=express.Router();
 const asyncWrap = require("../utilities/asyncWrap.js");
 
 const passport = require("passport");
-const { saveRedirectUrl } = require("../middlewares.js");
 
+let User=require("../models/user.js")
 
 
 router.route("/signup")
@@ -24,10 +24,10 @@ router.route("/signup")
                 return next(err);
             }
             
-            res.redirect("/listings");
+            res.redirect("/");
         })
     } catch(e){
-        
+        console.log(e);
         res.redirect("/signup");
     }
 })
@@ -43,10 +43,7 @@ router.route("/login")
     }),
     async(req,res)=>{
        
-        if(res.locals.redirectUrl){
-            return res.redirect(res.locals.redirectUrl);
-        }
-        res.redirect("/listings");
+        res.redirect("/");
     }
 )
 
@@ -56,7 +53,7 @@ router.get("/logout",(req,res,next)=>{
             return next(err);
         }
         
-        res.redirect("/listings");
+        res.redirect("/");
     });
 });
 
