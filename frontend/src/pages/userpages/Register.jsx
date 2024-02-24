@@ -5,11 +5,11 @@ import {useState} from 'react';
 const Login=()=>{
     const [firstName,setFirstName]=useState("");
     const [lastName,setLastName]=useState("");
-  const [email,setEmail]=useState(""); 
-  const [passw, setPassw]=useState(""); 
-  const [emailErr,setEmailErr]=useState("");
-  const [passErr,setPassErr]=useState("");
-  const handleOnChange=(e)=>{
+    const [email,setEmail]=useState(""); 
+    const [passw, setPassw]=useState(""); 
+    const [emailErr,setEmailErr]=useState("");
+    const [passErr,setPassErr]=useState("");
+    const handleOnChange=(e)=>{
 
   }
 	return(

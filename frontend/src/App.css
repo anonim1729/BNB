@@ -50,3 +50,23 @@
 .loginBox button[type="submit"]:hover {
   background-color: #355e3b;
 }
+.card {
+  /* margin-top: 20px; */
+  display: flex;
+  box-shadow: 0px 0px 5px black;
+  width: 30%; /* Adjust the width as needed */
+  margin: 10px;
+}
+
+.card-img {
+  width: 100%; /* Half of the card's width */
+}
+
+.card-text {
+  width: 100%; /* Half of the card's width */
+  padding: 10px;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
