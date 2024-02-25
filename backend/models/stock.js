@@ -6,10 +6,10 @@ let stockSchema= new Schema({
     name: String,
     variety: String,
     quantity: Number,
+    threshold: Number,
     price: Number,
     note: String,
-    purchaseDate: Date,
-    expirationDate: Date,
+    lifeSpan: Number,
 },
 {
     timestamps:true

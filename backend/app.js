@@ -139,6 +139,7 @@ app.get("/farm/new",isLoggedIn,(req,res)=>{
 app.post("/farm/new",isLoggedIn,asyncWrap(async(req,res)=>{
     console.log(req.body.seed);
     let newSeed=new Stock(req.body.seed);
+    
     let saveSeed=await newSeed.save();
     res.redirect("/farm");
 }))
