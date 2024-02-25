@@ -148,17 +148,22 @@ app.get("/inventory", isLoggedIn, (req, res) => {
     res.render("inventory.ejs");
 })
 
-app.get("/noti",(req,res)=>{
-    res.statusCode(500).send({
-        body: "hello"
-    });
+app.get("/noti",async(req,res)=>{
+    let resArr=await Stock.find({});
+     resArr=resArr.filter((e)=>{
+        return e.quantity>e.threshold;
+    })
+    resArr=resArr.map((e)=>{
+        return e.name;
+    })
+    res.json(resArr);
 })
 
-app.get("/market",(req,res)=>{
+app.get("/market",isLoggedIn,(req,res)=>{
     res.render("marketPlace/index.ejs");
 })
 
-app.get("/market/buy",(req,res)=>{
+app.get("/market/buy",isLoggedIn,(req,res)=>{
     res.render("marketPlace/buy.ejs");
 })
 

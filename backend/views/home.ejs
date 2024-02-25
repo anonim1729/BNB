@@ -12,17 +12,37 @@
     let checkThreshold=()=>{
 
     }
-    window.addEventListener("load",async()=>{
-      let res=await fetch("http://localhost:3000/noti");
-      // let jsonres=await res.json();
-      // console.log(jsonres);
-      sendNoti("no");
+    window.addEventListener("load",()=>{
+      let nameData;
+      fetch("http://localhost:3000/noti")
+      .then(response => {
+                // Check if the request was successful (status code 200)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse the JSON response
+                return response.json();
+            })
+            .then(data => {
+                // Handle the data (an array in this case)
+                
+                nameData=[...data];
+                console.log(nameData);
+                if(nameData && nameData.length){
+                  sendNoti(nameData);
+                }
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Fetch error:', error);
+            })
+      
     })
-    let sendNoti=(noti)=>{
+    let sendNoti=(data)=>{
         Notification.requestPermission().then(perm=>{
             if(perm=="granted"){
-                const notif=new Notification("Buy grains for your crop now!",{
-                    body: "You are running out of stock",
+                const notif=new Notification("Warning!",{
+                    body: data.map(e => e).join(', ')+" are running out of stock",
                     data: {hello: "Buy grains for your crops now"}
                 })
 
