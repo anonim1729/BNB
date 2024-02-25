@@ -4,32 +4,8 @@
 
 <div class="card-container  row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1">
 
-  <div class="card m-3" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Name: Tomato Seeds</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">variety: Cherry Tomato</h6>
-      <h6 class="card-subtitle mb-2 text-body-secondary">quantity: 500,</h6>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Price: 15.99,</h6>
-      <p class="card-text">Note: High germination rate, store in a cool place</p>
-      <p class="card-text">Puchase Date: 2023-01-15</p>
-      <p class="card-text">expiration Date: 2024-01-15</p>
-      <a href="#" class="btn btn-success">Buy</a>
-      
-    </div>
-  </div>
-  <div class="card m-3" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Name: Tomato Seeds</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">variety: Cherry Tomato</h6>
-      <h6 class="card-subtitle mb-2 text-body-secondary">quantity: 500,</h6>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Price: 15.99,</h6>
-      <p class="card-text">Note: High germination rate, store in a cool place</p>
-      <p class="card-text">Puchase Date: 2023-01-15</p>
-      <p class="card-text">expiration Date: 2024-01-15</p>
-      <a href="#" class="btn btn-success">Buy</a>
-      
-    </div>
-  </div>
+  
+
   <%for(let seed of sortedSeeds){%>
   <div class="card m-3" style="width: 18rem;">
     <div class="card-body">
@@ -37,7 +13,7 @@
       <h6 class="card-subtitle mb-2 text-body-secondary">variety: <%=seed.variety%></h6>
       <h6 class="card-subtitle mb-2 text-body-secondary">quantity: <%=seed.quantity%>,</h6>
       <h6 class="card-subtitle mb-2 text-body-secondary">Price: <%=seed.price%>,</h6>
-      <p class="card-text">Note: <%=seed.note%></p>
+      <p class="card-text">specility: <%=seed.note%></p>
       <p class="card-text">Puchase Date: <%=seed.createdAt.toString()%></p>
       <p class="card-text">expiration Date: 2024-01-15</p>
       <a href="#" class="btn btn-success">Buy</a>
