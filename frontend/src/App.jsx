@@ -12,7 +12,6 @@ import SeedsData from './pages/dataComponents/SeedsData';
 import Inventory from './pages/Inventory';
 import Seed from './pages/dataComponents/Seed';
 import AddSeed from './pages/dataComponents/AddSeed';
-import Navbar from './components/Navbar';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 
@@ -47,16 +46,16 @@ function App() {
   return (
     <>
       <div className='container-body'>
-      <Navbar user={user}/>
       <Routes>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/chart' element={<Chart/>}></Route>
+        <Route path='/seedsdata' element={<SeedsData/>}></Route>
+        <Route path='/inventory' element={<Inventory/>}></Route>
+        <Route path='/seed' element={<Seed/>}></Route>
+        <Route path="/additem" element={<AddSeed/>}></Route>
         <Route path='/' element={<Home user={user}/>}></Route>
-        {user && user.length!=0? 
-        <Route path='' element={<Home/>}></Route>
-        : 
-        <Route path='/login' element={<Login/>}></Route>
-        }
         </Routes>
       </div>
       <Footer/>
