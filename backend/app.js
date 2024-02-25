@@ -145,7 +145,8 @@ app.post("/farm/new", isLoggedIn, asyncWrap(async (req, res) => {
 }))
 
 app.get("/inventory", isLoggedIn, (req, res) => {
-    res.render("inventory.ejs");
+    let user=req.user;
+    res.render("inventory.ejs",{user});
 })
 
 app.get("/noti",async(req,res)=>{

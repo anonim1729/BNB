@@ -7,10 +7,7 @@ let userSchema= new Schema({
         type: String,
         required: true, 
     },
-    // capacity: {
-    //     type: Number,
-    //     required: true,
-    // },
+    
     fertilizers:[
         {
             type: Schema.Types.ObjectId,
