@@ -7,3 +7,21 @@
       <p class="lead mb-4">SmartFarm Inventory Solution is a revolutionary platform designed to streamline farming activities for modern farmers like Steve. Offering real-time inventory tracking for seeds, tools, and resources, our intuitive interface ensures efficient management. Additionally, our system provides automated tool crafting suggestions, empowering farmers to maximize productivity and optimize their harvests with ease.</p>
     </div>
   </div>
+
+  <script>
+    let checkThreshold=()=>{
+      
+    }
+    let sendNoti=(noti)=>{
+        Notification.requestPermission().then(perm=>{
+            if(perm=="granted"){
+                const notif=new Notification("example notification",{
+                    body: "this is more text",
+                    data: {hello: "world"}
+                })
+
+                
+            }
+        })
+    }
+  </script>
