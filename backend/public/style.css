@@ -37,8 +37,8 @@ body{
 }
 
 footer{
-    height: 6.5rem;
-    width: 100vw;
+    height: 5.5rem;
+    max-width: 100vw;
 
 }
 
