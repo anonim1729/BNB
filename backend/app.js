@@ -148,6 +148,18 @@ app.get("/inventory", isLoggedIn, (req, res) => {
     res.render("inventory.ejs");
 })
 
+app.get("/noti",(req,res)=>{
+    res.send(hello);
+})
+
+app.get("/market",(req,res)=>{
+    res.render("marketPlace/index.ejs");
+})
+
+app.get("/market/buy",(req,res)=>{
+    res.render("marketPlace/buy.ejs");
+})
+
 
 app.all("*", (req, res, next) => {
     let err = new ExpressErr(404, "Page not found");

@@ -10,8 +10,14 @@
 
   <script>
     let checkThreshold=()=>{
-      
+
     }
+    window.addEventListener("load",async()=>{
+      let res=await fetch("http://localhost:3000/noti");
+      // let jsonres=await res.json();
+      // console.log(jsonres);
+      sendNoti("no");
+    })
     let sendNoti=(noti)=>{
         Notification.requestPermission().then(perm=>{
             if(perm=="granted"){
