@@ -42,6 +42,7 @@ const ExpressErr=require("./utilities/expressError.js");
 
 let User=require("./models/user");
 let Tool=require("./models/tool.js");
+let Stock=require("./models/stock.js")
 
 const session=require("express-session");
 const MongoStore = require('connect-mongo');
@@ -108,6 +109,7 @@ app.use("/",userRouter);
 
  app.get("/workbench",isLoggedIn,asyncWrap(async(req,res)=>{
     let toolArr=await Tool.find({});
+     toolArr = toolArr.sort((a, b) => (a.createdAt > b.createdAt) ? -1 : 1);
     console.log(toolArr);
     res.render("workbench.ejs",{toolArr});
  }))
@@ -117,17 +119,29 @@ app.get("/workbench/new",isLoggedIn,(req,res)=>{
 })
 
 app.post("/workbench/new",isLoggedIn,asyncWrap(async(req,res)=>{
-    console.log(req.body);
+    
     let newTool=new Tool(req.body.tool);
     let saveTool=await newTool.save();
     res.redirect("/workbench");
 }));
 
- app.get("/farm",isLoggedIn,(req,res)=>{
-    res.render("farm.ejs");
- })
+ app.get("/farm",isLoggedIn,asyncWrap(async(req,res)=>{
+    let stockArr=await Stock.find({});
+    const sortedSeeds = stockArr.sort((a, b) => (a.createdAt > b.createdAt) ? -1 : 1);
+    console.log(sortedSeeds);
+    res.render("farm.ejs",{sortedSeeds});
+ }))
 
+app.get("/farm/new",isLoggedIn,(req,res)=>{
 
+    res.render("farm/newSeed.ejs");
+})
+app.post("/farm/new",isLoggedIn,asyncWrap(async(req,res)=>{
+    console.log(req.body.seed);
+    let newSeed=new Stock(req.body.seed);
+    let saveSeed=await newSeed.save();
+    res.redirect("/farm");
+}))
 
 
   app.all("*",(req,res,next)=>{

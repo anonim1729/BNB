@@ -9,6 +9,9 @@ let toolSchema= new Schema({
     }],
     uses: String,
     price: Number,
+},
+{
+    timestamps:true
 });
 
 module.exports=mongoose.model("Tool",toolSchema)
