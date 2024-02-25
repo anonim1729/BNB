@@ -1,5 +1,10 @@
 .myClass {
     line-height: 3rem;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.491);
+    border-bottom: 1px solid #198754;
+    
 
+}
+
+.myClass i {
+    color: #198754;
 }

@@ -18,3 +18,11 @@
     width: 98vw;
     padding: 1rem;
 }
+
+.myClass i {
+    color: #198754;
+}
+
+span {
+    color: #198754;
+}
