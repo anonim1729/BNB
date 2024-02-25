@@ -2,6 +2,7 @@ import React from 'react'
 import {useState} from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../../config'
+import { Link } from 'react-router-dom';
 
 const Login=()=>{
 
@@ -55,6 +56,8 @@ const Login=()=>{
           
 				</div>  
 				<button type="submit">Login</button>
+				<hr />
+      			<Link to="/login">Already registered?</Link>
 			</form>
 		</div>
 	)

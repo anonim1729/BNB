@@ -3,7 +3,6 @@ import AddSeed from "./dataComponents/AddSeed";
 import Chart from "./dataComponents/Chart";
 import SeedsData from "./dataComponents/SeedsData";
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
 
 const Inventory = () => {
     const [seedData,setSeedData]=useState([

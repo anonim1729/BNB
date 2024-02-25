@@ -20,7 +20,8 @@ main().then((res) => {
     console.log(err);
 })
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/cma");
+    await mongoose.connect(dbUrl);
+    // await mongoose.connect("mongodb://127.0.0.1:27017/cma");
 }
 
 let User=require("./models/user");
@@ -56,6 +57,23 @@ app.use(session(sessionOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.serializeUser(function(user,done){  
+
+    done(null,user);
+  });
+  passport.deserializeUser(function(id,done){
+      User
+      .findById(id)
+      .then(function(user){
+          // console.log(user);
+          done(null,user);
+      })
+      .catch((err)=>{
+        console.log(err);
+        done(err,user);
+      })
+  });
 
 
 app.use(cors({
@@ -117,6 +135,13 @@ app.post("/register",async(req,res,next)=>{
         res.send(e);
     }
 })
+
+app.post('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.send('logged out');
+    });
+  });
 
 app.listen(3000, () => {
     console.log("app running on 3000");

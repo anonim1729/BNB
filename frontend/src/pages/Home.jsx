@@ -7,7 +7,8 @@ import Hero from '../components/Hero'
 const Home = ({user}) => {
   return (
     <>
-      <Navbar/>
+    
+
       <Hero/>
       <Carousel/>
     </>

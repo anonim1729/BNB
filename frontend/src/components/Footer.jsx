@@ -8,7 +8,7 @@ const Footer = () => {
                 <p className="col-md-4 mb-0 text-muted">&copy; 2021 Company, Inc</p>
 
                 <a href="/" className="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <i className="fa-brands fa-galactic-senate" style={{fontSize:"3rem"}}></i>
+                <i className="fa-solid fa-leaf" style={{fontSize:"3rem"}}></i> 
                 </a>
 
                 <ul className="nav col-md-4 justify-content-end">
