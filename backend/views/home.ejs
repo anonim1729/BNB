@@ -21,9 +21,9 @@
     let sendNoti=(noti)=>{
         Notification.requestPermission().then(perm=>{
             if(perm=="granted"){
-                const notif=new Notification("example notification",{
-                    body: "this is more text",
-                    data: {hello: "world"}
+                const notif=new Notification("Buy grains for your crop now!",{
+                    body: "You are running out of stock",
+                    data: {hello: "Buy grains for your crops now"}
                 })
 
                 

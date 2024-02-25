@@ -149,7 +149,9 @@ app.get("/inventory", isLoggedIn, (req, res) => {
 })
 
 app.get("/noti",(req,res)=>{
-    res.send(hello);
+    res.statusCode(500).send({
+        body: "hello"
+    });
 })
 
 app.get("/market",(req,res)=>{
